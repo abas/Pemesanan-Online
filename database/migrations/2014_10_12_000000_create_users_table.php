@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
 
             $table->enum('type',['admin','user'])->default('user');
-            $table->string('kontak');
-            $table->string('name_rek');
-            $table->string('no_rek')->unique();
+            $table->string('kontak')->nullable();
+            $table->string('name_rek')->nullable();
+            $table->string('no_rek')->unique()->nullable();
 
             $table->rememberToken();
             $table->timestamps();
