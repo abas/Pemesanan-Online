@@ -18,6 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+
+            $table->enum('type',['admin','user'])->default('user');
+            $table->string('kontak');
+            $table->string('no_rek');
+
             $table->rememberToken();
             $table->timestamps();
         });
