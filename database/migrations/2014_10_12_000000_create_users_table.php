@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
 
             $table->enum('type',['admin','user'])->default('user');
             $table->string('kontak');
-            $table->string('no_rek');
+            $table->string('name_rek');
+            $table->string('no_rek')->unique();
 
             $table->rememberToken();
             $table->timestamps();
