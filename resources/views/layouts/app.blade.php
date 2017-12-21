@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -71,7 +72,37 @@
             </div>
         </nav>
 
-        @yield('content')
+     
+        <div class="container">
+            <div class="row">
+                @if (session('status'))
+                    <div class="col-md-12">
+                    
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    </div>
+                @endif
+                <div class="col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Menu</div>
+                        <div class="panel-body">
+                            <a href="#">Semua Menu</a>
+                            <a href="#">Tambah Makanan</a>
+                            <a href="#">Tambah Minuman</a>
+                            <a href="#">Pesanan</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                         @yield('content')   
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
