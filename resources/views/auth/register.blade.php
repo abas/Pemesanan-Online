@@ -40,7 +40,7 @@
                         </div>
                         
                         <div class="form-group{{ $errors->has('kontak') ? ' has-error' : '' }}">
-                            <label for="kontak" class="col-md-4 control-label">Kontak Person</label>
+                            <label for="kontak" class="col-md-4 control-label">Kontak</label>
 
                             <div class="col-md-6">
                                 <input placeholder="ex: 081234xxx or @telegram @line @instagram" id="kontak" type="kontak" class="form-control" name="kontak" value="{{ old('kontak') }}" required>
