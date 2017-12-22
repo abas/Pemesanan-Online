@@ -28,11 +28,11 @@ class HomeController extends Controller
     public function index()
     {
         $userAuth = Auth::User();
-        if(Menu::find($userAuth->id)!=null){
-            $menus = Menu::find($userAuth->id)->All();
-        }else{
-            
-        }
+        // if(Menu::IsEmpty($userAuth->id)){
+        //     $menus = new Menu;
+        // }else{
+        // }
+        $menus = Menu::where('user_id','=',$userAuth->id)->get();
         $user = new User;
         return view('home',compact('menus','user'));
     }
