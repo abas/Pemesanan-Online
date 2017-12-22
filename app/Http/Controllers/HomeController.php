@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Menu;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home')->with('status','You are Logon');
+        $menus = Menu::All();
+        $user = new User;
+        return view('home',compact('menus','user'));
     }
 }
