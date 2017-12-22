@@ -39,7 +39,7 @@
             <a href="#" class="btn btn-danger">Pesanan</a>
             <br><br>
             <div class="row">
-                @if($menus->count()!=0)
+                @if($menus->count()>0)
                     @foreach($menus as $menu)
                     <div class="col-md-4">
 
