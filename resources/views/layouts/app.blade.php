@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+        Pemesanan Online
+    </title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,7 +32,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    Pemesanan Online
                     </a>
                 </div>
 
@@ -73,38 +75,9 @@
         </nav>
 
      
-        <div class="container">
-            <div class="row">
-                @if (session('status'))
-                    <div class="col-md-12">
-                    
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    </div>
-                @endif
-                <div class="col-md-2">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Menu</div>
-                        <div class="panel-body">
-                            <a href="#">Semua Menu</a>
-                            <a href="#">Tambah Makanan</a>
-                            <a href="#">Tambah Minuman</a>
-                            <a href="#">Pesanan</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-10">
-                    <div class="panel panel-default">
-                         @yield('content')   
+        @yield('content')   
                      
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+                        
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
