@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Menu;
 use App\User;
 
@@ -25,7 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $menus = Menu::All();
+        $userAuth = Auth::User();
+        if(Menu::find($userAuth->id)!=null){
+            $menus = Menu::find($userAuth->id)->All();
+        }else{
+            
+        }
         $user = new User;
         return view('home',compact('menus','user'));
     }
