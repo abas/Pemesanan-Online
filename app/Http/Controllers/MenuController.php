@@ -101,7 +101,8 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menus = Menu::find($id);
+        return view('edit',compact('menus'));
     }
 
     /**
@@ -113,7 +114,37 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'jenis'         => 'required',
+            'harga_menu'      => 'required',
+            'nama_menu'       => 'required',
+            'deskripsi_menu'       => 'required',
+            'stok_menu'       => 'required'
+            // 'stok_menu'       => 'required'
+        ];
+        
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return redirect(route('tambah_menu'))
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        $user_id = Auth::user()->id;
+
+        $data = Menu::find($id);
+        // $data->user_id = $user_id;
+        // $data->kode_menu = Menu::RandomCode();
+        $data->jenis = $request->jenis;
+        $data->nama_menu = $request->nama_menu;
+        $data->harga_menu = $request->harga_menu;
+        $data->deskripsi_menu = $request->deskripsi_menu;
+        $data->stok_menu = $request->stok_menu;
+        // $data->save();
+        if($data->update()){
+            return redirect(route('home'))->with("msg","menu berhasil di edit");
+        }
+        return redirect(route('home')->with("msg","gagal mengedit menu"));
     }
 
     /**
@@ -124,6 +155,12 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menus = Menu::find($id);
+        if(Auth::user()->id == $menus->user_id){
+            if($menus->delete()){
+                return redirect(route('home'))->with('msg','menu berhasil di hapus');
+            }
+        }
+        return redirect(route('home'))->with('msg','menu gagal di hapus');
     }
 }
