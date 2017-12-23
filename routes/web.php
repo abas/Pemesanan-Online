@@ -31,5 +31,9 @@ Route::group(['prefix'=>'home'],function(){
     Route::group(['prefix'=>'menus'],function(){
         Route::get('/add',['as'=>'tambah_menu','uses'=>'MenuController@create']);
         Route::post('/add',['as'=>'simpan_menu','uses'=>'MenuController@store']);
+
+        Route::get('/edit/{id}',['as'=>'edit_menu','uses'=>'MenuController@edit']);
+        Route::post('/edit/{id}',['as'=>'update_menu','uses'=>'MenuController@update']);
+
     });
 });
