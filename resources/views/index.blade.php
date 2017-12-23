@@ -100,17 +100,20 @@
         </div>
         <div class="container">
             <div class="row">
+                @if($menus->count()>0)
                 <div class="col-md-8 col-md-offset-2">
                     <center>
                         <h1>Makanan</h1>
                     </center>
                 </div>
+                @endif
                 @foreach($menus as $menu)
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3>{{$menu->nama_menu}}</h3>
-                            <h4>Rp. <b>{{$menu->harga_menu}}</b></h4>
+                            <h6>by : <b>{{$user->getName($menu->user_id)}}</b></h6>
+                            <h2>Rp. <b>{{$menu->harga_menu}}</b></h2>
                         </div>
                         <div class="panel-body">
                             {{$menu->deskripsi_menu}}
