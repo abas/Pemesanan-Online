@@ -47,9 +47,10 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'nama_pemesan'         => 'required',
+            'nama_pemesan'        => 'required',
             'kontak_pemesan'      => 'required',
-            'jenis_pemesanan'       => 'required',
+            'jenis_pemesanan'     => 'required',
+            'jumlah'              => 'required'
         ];
 
         if($request->jenis_pemesanan === "antar"){
@@ -65,15 +66,19 @@ class TransaksiController extends Controller
 
         $menu = Menu::find($request->menu_id);
         $data = new Transaksi();
+        if($request->jumlah > $menu->stok_menu){
+            return redirect()->back()->with('msg','Maaf, jumlah pemesanan melebihi batas!');
+        }else{
+            $data->jumlah = $request->jumlah;
+        }
+        if($request->jenis_pemesanan === "antar"){
+            $data->lokasi_pemesan = $request->lokasi_pemesan;
+        }
         $data->user_id = $menu->user_id;    
         $data->menu_id = $request->menu_id;
         $data->nama_pemesan = $request->nama_pemesan;
         $data->kontak_pemesan = $request->kontak_pemesan;
         $data->jenis_pemesanan = $request->jenis_pemesanan;
-        $data->jumlah = $request->jumlah;
-        if($request->jenis_pemesanan === "antar"){
-            $data->lokasi_pemesan = $request->lokasi_pemesan;
-        }
         if($data->save()){
             $menu->stok_menu = $menu->stok_menu - $request->jumlah;
             $menu->update();

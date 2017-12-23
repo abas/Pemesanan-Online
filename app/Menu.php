@@ -50,4 +50,9 @@ class Menu extends Model
     {
         return Menu::find($id)->nama_menu;
     }
+
+    public static function getHarga($id)
+    {
+        return Menu::find($id)->harga_menu;
+    }
 }

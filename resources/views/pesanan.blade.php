@@ -23,12 +23,15 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4>{{$menu->getName($psn->menu_id)}} <b>[{{$psn->jenis_pemesanan}}]</b></h4>
-                              </div>
+                              <h4>{{$menu->getName($psn->menu_id)}} <b>[{{$psn->jenis_pemesanan}}]</b><br>
+                                Harga : Rp. {{$menu->getHarga($psn->menu_id)}}
+                              </h4>
+                            </div>
                             <div class="panel-body">
                               Pemesan : <b>{{$psn->nama_pemesan}}</b><br>
                               Jumlah : <b>{{$psn->jumlah}}</b><br>
-                              Kontak : <b>{{$psn->kontak_pemesan}}</b>
+                              Kontak : <b>{{$psn->kontak_pemesan}}</b><br>
+                              Total : <b style="font-size:25px;">Rp. {{$menu->getHarga($psn->menu_id) * $psn->jumlah}}</b>
                               <br><br>
                               @if($psn->jenis_pemesanan == 'antar')
                                 @if($psn->status == 'belum_terbayar')

@@ -1,6 +1,11 @@
 @extends('layouts.app') @section('content')
 <div class="container">
     <div class="row">
+      @if(session('msg'))
+        <div class="col-md-6 col-md-offset-3">
+          <p class="alert alert-danger">{{session('msg')}}</p>
+        </div>
+      @endif
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading"><h1>{{$menu->nama_menu}}</h1></div>

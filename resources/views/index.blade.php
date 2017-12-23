@@ -108,6 +108,7 @@
                 </div>
                 @endif
                 @foreach($makanans as $makanan)
+                @if($makanan->stok_menu>0)
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -126,6 +127,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div>
             <div class="row">
@@ -137,6 +139,7 @@
                 </div>
                 @endif
                 @foreach($minumans as $minuman)
+                @if($minuman->stok_menu>0)
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -155,6 +158,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div>
         </div>
