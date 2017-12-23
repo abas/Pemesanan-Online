@@ -3,11 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Menu;
 use App\User;
+use Validator;
 
 class MenuController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +28,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::All();
-        return view('index',compact('menus'));
+        // 
     }
 
     /**
@@ -26,7 +38,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        return view('tambah_menu');
     }
 
     /**
@@ -36,8 +48,38 @@ class MenuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $rules = [
+            'jenis'         => 'required',
+            'harga_menu'      => 'required',
+            'nama_menu'       => 'required',
+            'deskripsi_menu'       => 'required',
+            'stok_menu'       => 'required'
+            // 'stok_menu'       => 'required'
+        ];
+        
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return redirect(route('tambah_menu'))
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        $user_id = Auth::user()->id;
+
+        $data = new Menu();
+        $data->user_id = $user_id;
+        $data->kode_menu = Menu::RandomCode();
+        $data->jenis = $request->jenis;
+        $data->nama_menu = $request->nama_menu;
+        $data->harga_menu = $request->harga_menu;
+        $data->deskripsi_menu = $request->deskripsi_menu;
+        $data->stok_menu = $request->stok_menu;
+        // $data->save();
+        if($data->save()){
+            return redirect(route('home'))->with("msg","menu berhasil di tambah");
+        }
+        return redirect(route('home')->with("msg","gagal menambahkan menu"));
     }
 
     /**
