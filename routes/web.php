@@ -15,9 +15,13 @@ use App\Menu;
 use App\User;
 
 Route::get('/', function(){
-    $menus = Menu::All();
+    // $menus = Menu::All();
+    $menus = DB::table('menu');
+    $makanans = $menus->where('jenis','=','makanan')->get();
+    $menus = DB::table('menu');
+    $minumans = $menus->where('jenis','=','minuman')->get();
     $user = new User();
-    return view('index',compact('menus','user'));
+    return view('index',compact('menus','user','makanans','minumans'));
 });
 
 Auth::routes();
