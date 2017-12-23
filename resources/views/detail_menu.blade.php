@@ -40,6 +40,10 @@
                               </span>
                             @endif
                           </div>
+                          <div class="col-md-6">
+                            <label for="jumlah">Jumlah Pesanan*</label>
+                            <input type="number" min="0" name="jumlah" id="jumlah" placeholder="Jumlah Pesanan" class="form-control" require>
+                          </div>
                         </div>
                         <div class="form-group{{ $errors->has('nama_pemesan') ? ' has-error' : '' }}">
                           <div class="col-md-12">
