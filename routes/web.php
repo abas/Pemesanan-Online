@@ -38,3 +38,8 @@ Route::group(['prefix'=>'home'],function(){
         Route::get('/delete/{id}',['as'=>'delete_menu','uses'=>'MenuController@destroy']);
     });
 });
+
+Route::group(['prefix'=>'transaksi'],function(){
+   Route::get('/pesan/{id}',['as'=>'pemesanan','uses'=>'TransaksiController@create']);
+   Route::post('/pesan',['as'=>'simpan_transaksi','uses'=>'TransaksiController@store']);
+});
