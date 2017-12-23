@@ -34,6 +34,7 @@ class HomeController extends Controller
         // }
         $menus = Menu::where('user_id','=',$userAuth->id)->get();
         $user = new User;
+        // $all_kode_menu = Menu::RandomCode();
         return view('home',compact('menus','user'));
     }
 }
