@@ -42,4 +42,5 @@ Route::group(['prefix'=>'home'],function(){
 Route::group(['prefix'=>'transaksi'],function(){
    Route::get('/pesan/{id}',['as'=>'pemesanan','uses'=>'TransaksiController@create']);
    Route::post('/pesan',['as'=>'simpan_transaksi','uses'=>'TransaksiController@store']);
+   Route::get('/pesanan/{id}',['as'=>'detail_pesanan','uses'=>'TransaksiController@pesanan']);
 });
