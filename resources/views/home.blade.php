@@ -36,7 +36,7 @@
             <h2>Semua Menu</h2>
             <!-- <a href="#" class="btn btn-warning">add Makanan</a> -->
             <a href="{{route('tambah_menu')}}" class="btn btn-success">Tambah Menu</a>
-            <a href="#" class="btn btn-danger">Pesanan</a>
+            <a href="#" class="btn btn-warning">Pesanan</a>
             <br><br>
             <div class="row">
                 @if($menus->count()>0)
@@ -54,7 +54,8 @@
                             </div>
                             <div class="panel-footer">
                                 <p style="text-align: right"><b>Stok : {{$menu->stok_menu}}</b></p>
-                                <a href="" class="btn btn-info">Pesan</a>
+                                <a href="" class="btn btn-danger">Hapus</a>
+                                <a href="" class="btn btn-info">Edit</a>
                             </div>
                         </div>
 
