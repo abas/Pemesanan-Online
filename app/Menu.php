@@ -26,4 +26,23 @@ class Menu extends Model
         }
         return true;
     }
+
+    public static function RandomCode()
+    {
+        $kode_menu = Menu::pluck('kode_menu')->toArray();
+        $chars = "abcdefghijkmnopqrstuvwxyz023456789"; 
+        srand((double)microtime()*1000000); 
+        $i = 0; 
+        $pass = '' ; 
+    
+        while(in_array($pass,$kode_menu)){
+            while ($i <= 7) { 
+                $num = rand() % 33; 
+                $tmp = substr($chars, $num, 1); 
+                $pass = $pass . $tmp; 
+                $i++; 
+            } 
+        } 
+        return $pass;
+    }
 }
