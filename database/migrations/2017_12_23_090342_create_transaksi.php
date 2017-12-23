@@ -18,7 +18,13 @@ class CreateTransaksi extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('menu_id');
-            $table->enum('status',['terbayar','belum terbayar']);
+
+            $table->string('nama_pemesan');
+            $table->string('kontak_pemesan');
+            $table->enum('jenis_pemesanan',['ambil','antar']);
+            $table->string('lokasi_pemesan')->nullable();
+
+            $table->enum('status',['terbayar','belum_terbayar'])->default('belum_terbayar');
             $table->timestamps();
         });
     }
