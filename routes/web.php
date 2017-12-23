@@ -11,8 +11,21 @@
 |
 */
 
-Route::get('/', 'MenuController@index');
+use App\Menu;
+use App\User;
+
+Route::get('/', function(){
+    $menus = Menu::All();
+    $user = new User();
+    return view('index',compact('menus','user'));
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix'=>'home'],function(){
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::group(['prefix'=>'menus'],function(){
+        Route::get('/add',['as'=>'tambah_menu','uses'=>'MenuController@create']);
+        Route::post('/add',['as'=>'simpan_menu','uses'=>'MenuController@store']);
+    });
+});
