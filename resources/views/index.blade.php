@@ -122,7 +122,7 @@
                         </div>
                         <div class="panel-footer" style="text-align:right">
                             <b>{{$makanan->stok_menu}} tersisa &nbsp;</b>
-                            <a href="#" class="btn btn-info">Pesan</a> 
+                            <a href="{{route('pemesanan',$makanan->id)}}" class="btn btn-info">Pesan</a> 
                         </div>
                     </div>
                 </div>
