@@ -14,7 +14,7 @@
             <h2>Semua Menu</h2>
             <!-- <a href="#" class="btn btn-warning">add Makanan</a> -->
             <a href="{{route('tambah_menu')}}" class="btn btn-success">Tambah Menu</a>
-            <a href="#" class="btn btn-warning">Pesanan</a>
+            <a href="{{route('pesanan')}}" class="btn btn-warning">Pesanan</a>
             <br><br>
             <div class="row">
                 @if($menus->count()>0)

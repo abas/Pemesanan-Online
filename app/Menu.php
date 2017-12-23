@@ -45,4 +45,9 @@ class Menu extends Model
         } 
         return $pass;
     }
+
+    public static function getName($id)
+    {
+        return Menu::find($id)->nama_menu;
+    }
 }

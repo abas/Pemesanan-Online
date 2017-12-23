@@ -37,6 +37,10 @@ Route::group(['prefix'=>'home'],function(){
         
         Route::get('/delete/{id}',['as'=>'delete_menu','uses'=>'MenuController@destroy']);
     });
+
+    Route::group(['prefix'=>'pesanan'],function(){
+        Route::get('/',['as'=>'pesanan','uses'=>'TransaksiController@index']);
+    });
 });
 
 Route::group(['prefix'=>'transaksi'],function(){

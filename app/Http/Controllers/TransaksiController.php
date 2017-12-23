@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Menu;
 use App\Transaksi;
+use App\User;
+
 use Validator;
 
 class TransaksiController extends Controller
@@ -17,7 +20,11 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        // $pesanan = Transaksi::All();
+        $user = new User();
+        $menu = new Menu();
+        $pesanan = Transaksi::where('user_id','=',Auth::user()->id)->get();
+        return view('pesanan',compact('pesanan','user','menu'));
     }
 
     /**
@@ -87,7 +94,8 @@ class TransaksiController extends Controller
     {
         $pesanan = Transaksi::find($id);
         $menu = Menu::find($pesanan->menu_id);
-        return view('detail_pesanan',compact('pesanan','menu'));
+        $user = User::find($menu->user_id);
+        return view('detail_pesanan',compact('pesanan','menu','user'));
     }
 
     /**
