@@ -67,8 +67,10 @@ class TransaksiController extends Controller
             $data->lokasi_pemesan = $request->lokasi_pemesan;
         }
         if($data->save()){
-            // return redirect(route('detail_pesanan'))->with('msg','pesanan success');
+            $menu->stok_menu = $menu->stok_menu -1;
+            $menu->update();
             return $data;
+            // return redirect(route('detail_pesanan'))->with('msg','pesanan success');
         }
         return redirect()->back()->with('msg','pesanan gagal');
         
