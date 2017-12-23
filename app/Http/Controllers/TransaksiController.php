@@ -63,14 +63,15 @@ class TransaksiController extends Controller
         $data->nama_pemesan = $request->nama_pemesan;
         $data->kontak_pemesan = $request->kontak_pemesan;
         $data->jenis_pemesanan = $request->jenis_pemesanan;
+        $data->jumlah = $request->jumlah;
         if($request->jenis_pemesanan === "antar"){
             $data->lokasi_pemesan = $request->lokasi_pemesan;
         }
         if($data->save()){
-            $menu->stok_menu = $menu->stok_menu -1;
+            $menu->stok_menu = $menu->stok_menu - $request->jumlah;
             $menu->update();
-            return $data;
-            // return redirect(route('detail_pesanan'))->with('msg','pesanan success');
+            // return $data;
+            return redirect(route('detail_pesanan',$data->id))->with('msg','pesanan success');
         }
         return redirect()->back()->with('msg','pesanan gagal');
         
@@ -82,9 +83,11 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function pesanan($id)
     {
-        //
+        $pesanan = Transaksi::find($id);
+        $menu = Menu::find($pesanan->menu_id);
+        return view('detail_pesanan',compact('pesanan','menu'));
     }
 
     /**

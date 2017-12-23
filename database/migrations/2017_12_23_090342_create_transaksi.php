@@ -19,6 +19,7 @@ class CreateTransaksi extends Migration
             $table->integer('user_id');
             $table->integer('menu_id');
 
+            $table->integer('jumlah');
             $table->string('nama_pemesan');
             $table->string('kontak_pemesan');
             $table->enum('jenis_pemesanan',['ambil','antar']);

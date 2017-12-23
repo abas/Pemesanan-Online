@@ -10,7 +10,7 @@ class Transaksi extends Model
     protected $fillable = [
         'user_id','menu_id','status',
         'nama_pemesan','kontak_pemesan','lokasi_pemesan',
-        'jenis_pemesanan'
+        'jenis_pemesanan','jumlah'
     ];
     protected $hidden = [
         'menu_id','user_id'
