@@ -17,6 +17,7 @@ class CreateMenuTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('kode_menu')->unique();
+            $table->enum('jenis',['makanan','minuman','lainnya'])->default('lainnya');
             $table->string('nama_menu');
             $table->integer('harga_menu');
             $table->string('deskripsi_menu');
