@@ -34,8 +34,8 @@
         </div> -->
         <div class="col-md-12">
             <h2>Semua Menu</h2>
-            <a href="#" class="btn btn-warning">add Makanan</a>
-            <a href="#" class="btn btn-success">add Minuman</a>
+            <!-- <a href="#" class="btn btn-warning">add Makanan</a> -->
+            <a href="{{route('tambah_menu')}}" class="btn btn-success">Tambah Menu</a>
             <a href="#" class="btn btn-danger">Pesanan</a>
             <br><br>
             <div class="row">
