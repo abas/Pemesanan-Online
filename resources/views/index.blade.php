@@ -100,26 +100,57 @@
         </div>
         <div class="container">
             <div class="row">
-                @if($menus->count()>0)
+                @if($makanans->count()>0)
                 <div class="col-md-8 col-md-offset-2">
                     <center>
                         <h1>Makanan</h1>
                     </center>
                 </div>
                 @endif
-                @foreach($menus as $menu)
+                @foreach($makanans as $makanan)
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3>{{$menu->nama_menu}}</h3>
-                            <h6>by : <b>{{$user->getName($menu->user_id)}}</b></h6>
-                            <h2>Rp. <b>{{$menu->harga_menu}}</b></h2>
+                            <h3>{{$makanan->nama_menu}}</h3>
+                            <h6>by : <b>{{$user->getName($makanan->user_id)}}</b></h6>
+                            <h2>Rp. <b>{{$makanan->harga_menu}}</b></h2>
                         </div>
                         <div class="panel-body">
-                            {{$menu->deskripsi_menu}}
+                            <b>
+                                {{$makanan->deskripsi_menu}}
+                            </b>
                         </div>
                         <div class="panel-footer" style="text-align:right">
-                            <b>{{$menu->stok_menu}} tersisa &nbsp;</b>
+                            <b>{{$makanan->stok_menu}} tersisa &nbsp;</b>
+                            <a href="#" class="btn btn-info">Pesan</a> 
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="row">
+                @if($minumans->count()>0)
+                <div class="col-md-8 col-md-offset-2">
+                    <center>
+                        <h1>Minuman</h1>
+                    </center>
+                </div>
+                @endif
+                @foreach($minumans as $minuman)
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>{{$minuman->nama_menu}}</h3>
+                            <h6>by : <b>{{$user->getName($minuman->user_id)}}</b></h6>
+                            <h2>Rp. <b>{{$minuman->harga_menu}}</b></h2>
+                        </div>
+                        <div class="panel-body">
+                            <b>
+                                {{$minuman->deskripsi_menu}}
+                            </b>
+                        </div>
+                        <div class="panel-footer" style="text-align:right">
+                            <b>{{$minuman->stok_menu}} tersisa &nbsp;</b>
                             <a href="#" class="btn btn-info">Pesan</a> 
                         </div>
                     </div>
