@@ -27,13 +27,15 @@
                                 by: <b>{{$user->getName($menu->user_id)}}</b>
                             </div>
                             <div class="panel-body">
-
                                 {{$menu->deskripsi_menu}}
                             </div>
                             <div class="panel-footer">
-                                <p style="text-align: right"><b>Stok : {{$menu->stok_menu}}</b></p>
-                                <a href="" class="btn btn-danger">Hapus</a>
-                                <a href="" class="btn btn-info">Edit</a>
+                                <p style="text-align: right">
+                                    <b>[{{$menu->jenis}}]</b>
+                                </p>
+                                <a href="{{route('delete_menu',$menu->id)}}" class="btn btn-danger">Hapus</a>
+                                <a href="{{route('edit_menu',$menu->id)}}" class="btn btn-info">Edit</a>
+                                Stok : <b>{{$menu->stok_menu}}</b>
                             </div>
                         </div>
 
