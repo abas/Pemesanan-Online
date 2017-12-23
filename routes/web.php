@@ -34,6 +34,7 @@ Route::group(['prefix'=>'home'],function(){
 
         Route::get('/edit/{id}',['as'=>'edit_menu','uses'=>'MenuController@edit']);
         Route::post('/edit/{id}',['as'=>'update_menu','uses'=>'MenuController@update']);
-
+        
+        Route::get('/delete/{id}',['as'=>'delete_menu','uses'=>'MenuController@destroy']);
     });
 });
