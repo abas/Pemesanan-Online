@@ -40,6 +40,11 @@ Route::group(['prefix'=>'home'],function(){
 
     Route::group(['prefix'=>'pesanan'],function(){
         Route::get('/',['as'=>'pesanan','uses'=>'TransaksiController@index']);
+        Route::get('/selesai/{id}',['as'=>'pemesanan_selesai','uses'=>'TransaksiController@selesai']);
+    });
+
+    Route::group(['prefix'=>'kuliah'],function(){
+        Route::get('/',['as'=>'kuliah','uses'=>'BayarkuliahController@index']);
     });
 });
 
@@ -48,3 +53,21 @@ Route::group(['prefix'=>'transaksi'],function(){
    Route::post('/pesan',['as'=>'simpan_transaksi','uses'=>'TransaksiController@store']);
    Route::get('/pesanan/{id}',['as'=>'detail_pesanan','uses'=>'TransaksiController@pesanan']);
 });
+
+// Route::get('/search/{keyword}',function($keyword){
+//     $keyword = explode(" ",$keyword);
+//     foreach($keyword as $key){
+//         $data[$key] = Menu::where('nama_menu','LIKE','%'.$key.'%')
+//         ->orWhere('deskripsi_menu','LIKE','%'.$key.'%')
+//         ->get();
+//     }
+//     // foreach($data as $key){
+//     //     foreach($key as $item){
+//     //         echo $item->nama_menu.'<br>';
+//     //     }
+//     // }
+//     // JSON
+//     return $data;
+// })->name('search');
+
+Route::get('/search',['as'=>'search','uses'=>'PencarianController@search']);
