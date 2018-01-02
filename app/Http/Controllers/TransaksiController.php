@@ -24,7 +24,8 @@ class TransaksiController extends Controller
         $user = new User();
         $menu = new Menu();
         $pesanan = Transaksi::where('user_id','=',Auth::user()->id)->get();
-        return view('pesanan',compact('pesanan','user','menu'));
+        $isNothing = Transaksi::Where('done','=','false')->get();
+        return view('pesanan',compact('pesanan','user','menu','isNothing'));
     }
 
     /**
@@ -121,9 +122,12 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function selesai($id)
     {
-        //
+        $pesanan = Transaksi::find($id);
+        $pesanan->done = 'true';
+        $pesanan->update();
+        return redirect()->back()->with('msg','pesanan oleh '.$pesanan->nama_pemesan.' telah selesai');
     }
 
     /**
