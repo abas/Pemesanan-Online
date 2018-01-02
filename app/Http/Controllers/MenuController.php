@@ -163,4 +163,9 @@ class MenuController extends Controller
         }
         return redirect(route('home'))->with('msg','menu gagal di hapus');
     }
+
+    public function cari($keyword){
+        $data = Menu::where('nama_menu', 'LIKE', '%'.$keyword.'%')->get();
+        return $data;
+    }
 }
