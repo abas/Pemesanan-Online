@@ -26,6 +26,7 @@ class CreateTransaksi extends Migration
             $table->string('lokasi_pemesan')->nullable();
 
             $table->enum('status',['terbayar','belum_terbayar'])->default('belum_terbayar');
+            $table->enum('done',['true','false'])->default('false');
             $table->timestamps();
         });
     }
