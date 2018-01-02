@@ -11,7 +11,7 @@ class Menu extends Model
     protected $table = 'menu';
     protected $fillable = [
         'user_id','kode_menu','nama_menu',
-        'deskripsi_menu','stok_menu','image_menu'
+        'deskripsi_menu','stok_menu','image_menu','harga_menu'
     ];
 
     protected $hidden = [
