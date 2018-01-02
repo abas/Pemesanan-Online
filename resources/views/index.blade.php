@@ -96,6 +96,11 @@
                         Udinus Cafe dan Ojek
                     </p>
                 </div>
+                <div class="links">
+                    <form action="{{route('search')}}" methods="get">
+                        <input name="keyword" type="text" style="font-weight:bold;border-radius:20ex;color:black;padding:5px;padding-left:10px" placeholder="Cari Makanan atau Minuman">
+                    </form>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -118,8 +123,8 @@
                         </div>
                         <div class="panel-body">
                             <b>
-                                {{$makanan->deskripsi_menu}}
                             </b>
+                                {{$makanan->deskripsi_menu}}
                         </div>
                         <div class="panel-footer" style="text-align:right">
                             <b>{{$makanan->stok_menu}} tersisa &nbsp;</b>
@@ -149,8 +154,8 @@
                         </div>
                         <div class="panel-body">
                             <b>
-                                {{$minuman->deskripsi_menu}}
                             </b>
+                                {{$minuman->deskripsi_menu}}
                         </div>
                         <div class="panel-footer" style="text-align:right">
                             <b>{{$minuman->stok_menu}} tersisa &nbsp;</b>
