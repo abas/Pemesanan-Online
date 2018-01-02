@@ -17,15 +17,18 @@
             <a href="{{route('home')}}" class="btn btn-warning">My Menu</a>
             <br><br>
             <div class="row">
-                @if($pesanan->count()>0)
+                @if($pesanan->count()>0 && $isNothing->count()>0)
                     @foreach($pesanan as $psn)
+                    @if($psn->done != 'true')
                     <div class="col-md-4">
 
                         <div class="panel panel-default">
+                            <a href="{{route('pemesanan_selesai',$psn->id)}}" style="margin-left: 92%;" class="btn btn-danger btn-sm"><b>X</b></a>
                             <div class="panel-heading">
                               <h4>{{$menu->getName($psn->menu_id)}} <b>[{{$psn->jenis_pemesanan}}]</b><br>
                                 Harga : Rp. {{$menu->getHarga($psn->menu_id)}}
                               </h4>
+                              
                             </div>
                             <div class="panel-body">
                               Pemesan : <b>{{$psn->nama_pemesan}}</b><br>
@@ -52,17 +55,18 @@
                                   <b>*beritahu pemesan jika pesanan sudah jadi</b>
                                 @else
                                   <form action="">
-                                    <button class="btn btn-"><b>Verifikasi Pembayaran</b></button>
+                                    <button class="btn btn-info"><b>Verifikasi Pembayaran</b></button>
                                   </form>
                                 @endif
                             </div>
                         </div>
 
                     </div>
+                    @endif
                     @endforeach
                 @else
                     <div class="col-md-12">
-                        <p class="alert alert-danger" style="width:100%">Menu Kosong!</p>
+                        <p class="alert alert-danger" style="width:100%">Tidak Ada Pesanan!</p>
                     </div>
                 @endif
             </div>
