@@ -34,57 +34,77 @@
 </head>
 
 <body>
-<!--Main Navigation-->
-<header>
+    <!--Main Navigation-->
+    <header>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark default-color">
-    <a class="navbar-brand" href="#">
-        <strong>Navbar</strong>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Opinions</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav nav-flex-icons">
-            <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fa fa-facebook"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fa fa-instagram"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-    
-</nav>
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+            <div class="container">
 
-</header>
-<!--Main Navigation-->
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="{{url('/')}}">Kantin
+                    <b>KU</b>
+                </a>
+                @if(Route::has('login') || Route::has('register')) @else
+                <form class="form-inline">
+                    <div class="md-form mt-0">
+                        <input style="text-align:right" class="form-control mr-sm-2" type="text" placeholder="Cari disini.. " aria-label="Search">
+                    </div>
+                </form>
+                @endif
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse mt-0" id="basicExampleNav">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <div class="form-inline">
+                        <div class="md-form mt-0">
+                            <ul class="navbar-nav mr-auto">
+                                @if(Route::has('login')) @auth
+                                <li class="nav-item active">
+                                    <div class="nav-link">
+                                            Abas
+                                        <span class="sr-only"></span>
+                                    </div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Logout</a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('login')}}">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="cursor: default">or</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('register')}}">Register</a>
+                                </li>
+                                @endauth @endif
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Collapsible content -->
+
+            </div>
+
+        </nav>
+        <!--/.Navbar-->
+    </header>
+    <!--Main Navigation-->
     <div>
         <!-- <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -142,16 +162,16 @@
         </nav> -->
 
         @yield('content')
-
-        <!-- Scripts -->
-        <!-- <script src="{{ asset('js/app.js') }}"></script> -->
-        <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+    </div>
+    <!-- Scripts -->
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 </body>
 
 </html>
