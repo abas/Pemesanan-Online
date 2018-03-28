@@ -22,9 +22,9 @@ class CreateMenuTable extends Migration
             $table->integer('harga_menu');
             $table->string('deskripsi_menu');
             $table->integer('stok_menu');
-            $table->string('image_menu');
+            $table->string('image_menu')->nullable();
             $table->timestamps();
-        });
+        }); 
     }
 
     /**
