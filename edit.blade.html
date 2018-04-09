@@ -1,80 +1,200 @@
-@extends('layouts.app') @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Tambah Menu</div>
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('update_menu',$menus->id) }}">
-                        {{ csrf_field() }}
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
-                        <div class="form-group{{ $errors->has('jenis') ? ' has-error' : '' }}">
-                            <label for="no_rek" class="col-md-4 control-label">Jenis Menu</label>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <select name="jenis" id="jenis" class="form-control">
-                                            <option value="{{$menus->jenis}}">{{$menus->jenis}}</option>
-                                            <option value="makanan">Makanan</option>
-                                            <option value="minuman">Minuman</option>
-                                            <option value="lainnya">Lainnya</option>
-                                            <!-- <input id="no_rek" type="no_rek" class="form-control" name="no_rek" value="{{ old('no_rek') }}" required> -->
-                                        </select>
+    <title>
+        Pemesanan Online
+    </title>
+
+    <!-- Styles -->
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
+    <style>
+    </style>
+</head>
+
+<body>
+    <!--Main Navigation-->
+    <header>
+
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+            <div class="container">
+
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="{{url('/')}}">Kantin
+                    <b>KU</b>
+                </a>
+                @if(Route::has('login') || Route::has('register')) @else
+                <form class="form-inline">
+                    <div class="md-form mt-0">
+                        <input style="text-align:right" class="form-control mr-sm-2" type="text" placeholder="Cari disini.. " aria-label="Search">
+                    </div>
+                </form>
+                @endif
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse mt-0" id="basicExampleNav">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <div class="form-inline">
+                        <div class="md-form mt-0">
+                            <ul class="navbar-nav mr-auto">
+                                @if(Route::has('login')) @auth
+                                <li class="nav-item active">
+                                    <div class="nav-link">
+                                        Abas
+                                        <span class="sr-only"></span>
                                     </div>
-                                    <div class="col-md-8">
-                                        <input placeholder="Harga Menu Rp. " id="harga_menu" type="number" class="form-control" min="0" name="harga_menu" value="{{$menus->harga_menu}}"
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Logout</a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('login')}}">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" style="cursor: default">or</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('register')}}">Register</a>
+                                </li>
+                                @endauth @endif
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Collapsible content -->
+
+            </div>
+
+        </nav>
+        <!--/.Navbar-->
+    </header>
+    <!--Main Navigation-->
+    <div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Tambah Menu</div>
+
+                        <div class="panel-body">
+                            <form class="form-horizontal" method="POST" action="{{ route('update_menu',$menus->id) }}">
+                                {{ csrf_field() }}
+
+                                <div class="form-group{{ $errors->has('jenis') ? ' has-error' : '' }}">
+                                    <label for="no_rek" class="col-md-4 control-label">Jenis Menu</label>
+
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <select name="jenis" id="jenis" class="form-control">
+                                                    <option value="{{$menus->jenis}}">{{$menus->jenis}}</option>
+                                                    <option value="makanan">Makanan</option>
+                                                    <option value="minuman">Minuman</option>
+                                                    <option value="lainnya">Lainnya</option>
+                                                    <!-- <input id="no_rek" type="no_rek" class="form-control" name="no_rek" value="{{ old('no_rek') }}" required> -->
+                                                </select>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input placeholder="Harga Menu Rp. " id="harga_menu" type="number" class="form-control" min="0" name="harga_menu" value="{{$menus->harga_menu}}"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                        @if ($errors->has('no_rek'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('no_rek') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('deskripsi_menu') ? ' has-error' : '' }}">
+                                    <label for="nama_menu" class="col-md-4 control-label">Nama Menu</label>
+
+                                    <div class="col-md-6">
+                                        <input placeholder="masukkan nama menu anda " id="nama_menu" type="text" class="form-control" name="nama_menu" value="{{$menus->nama_menu}}"
                                             required>
                                     </div>
                                 </div>
 
-                                @if ($errors->has('no_rek'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('no_rek') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
+                                <div class="form-group{{ $errors->has('deskripsi_menu') ? ' has-error' : '' }}">
+                                    <label for="deskripsi_menu" class="col-md-4 control-label">Diskripsi</label>
+                                    <div class="col-md-6">
+                                        <textarea placeholder="Masukkan Deskripsi" id="deskripsi_menu" type="text" class="form-control" name="deskripsi_menu" required>{{$menus->deskripsi_menu}}</textarea>
+                                    </div>
+                                </div>
 
-                        <div class="form-group{{ $errors->has('deskripsi_menu') ? ' has-error' : '' }}">
-                            <label for="nama_menu" class="col-md-4 control-label">Nama Menu</label>
-
-                            <div class="col-md-6">
-                                <input placeholder="masukkan nama menu anda " id="nama_menu" type="text" class="form-control" name="nama_menu" value="{{$menus->nama_menu}}"
-                                    required>
-                            </div>
+                                <div class="form-group{{ $errors->has('stok_menu') ? ' has-error' : '' }}">
+                                    <label for="stok_menu" class="col-md-4 control-label">Stok Menu</label>
+                                    <div class="col-md-2">
+                                        <input placeholder="tersisa" id="stok_menu" type="number" min="0" class="form-control" name="stok_menu" value="{{$menus->stok_menu}}"
+                                            required>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="submit" class="btn btn-info">
+                                            Update
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a class="btn" href="{{ route('home') }}">
+                                            Cancel
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="form-group{{ $errors->has('deskripsi_menu') ? ' has-error' : '' }}">
-                            <label for="deskripsi_menu" class="col-md-4 control-label">Diskripsi</label>
-                            <div class="col-md-6">
-                                <textarea placeholder="Masukkan Deskripsi" id="deskripsi_menu" type="text" class="form-control" name="deskripsi_menu"
-                                    required>{{$menus->deskripsi_menu}}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('stok_menu') ? ' has-error' : '' }}">
-                            <label for="stok_menu" class="col-md-4 control-label">Stok Menu</label>
-                            <div class="col-md-2">
-                                <input placeholder="tersisa" id="stok_menu" type="number" min="0" class="form-control" name="stok_menu" value="{{$menus->stok_menu}}"
-                                    required>
-                            </div>
-                            <div class="col-md-1">
-                                <button type="submit" class="btn btn-info">
-                                    Update
-                                </button>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn" href="{{ route('home') }}">
-                                    Cancel
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-</div>
-@endsection
+    <!-- Scripts -->
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+</body>
+
+</html>
