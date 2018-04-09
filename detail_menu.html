@@ -65,13 +65,13 @@
             <div class="md-form mt-0">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="{{route('login')}}">Login</a>
+                  <a class="nav-link" href="views/login.html">Login</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" style="cursor: default">or</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{route('register')}}">Register</a>
+                  <a class="nav-link" href="views/register.html">Register</a>
                 </li>
               </ul>
 
@@ -90,26 +90,26 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <!-- <div class="col-md-6 col-md-offset-3">
           <p class="alert alert-danger">Session Message</p>
-        </div>
+        </div> -->
         <div class="col-md-6 col-md-offset-3">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h1>Nama Menu</h1>
+              <h1>{{Nama Menu}}</h1>
             </div>
 
             <div class="panel-body">
               <form class="form-horizontal" action="#">
                 <div class="form-group">
                   <div class="col-md-12">
-                    <h3>Rp. Harga Menu</h3>
+                    <h3>Rp. {{Harga Menu}}</h3>
                   </div>
                   <div class="col-md-12">
-                    Deskripsi Menu
+                    {{Deskripsi Menu}}
                   </div>
                   <div class="col-md-12">
-                    tersisa : Stok Menu
+                    tersisa : {{Stok Menu}}
                   </div>
                 </div>
               </form>
