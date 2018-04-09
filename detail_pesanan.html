@@ -7,15 +7,15 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
   <!-- CSRF Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 
   <title>
     Pemesanan Online
   </title>
 
   <!-- Styles -->
-  <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->
+  <link href="asset/css/app.css" rel="stylesheet">
+  <link href="asset/css/style.css" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,11 +23,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
-  <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="asset/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
+  <link href="asset/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="{{asset('css/style.css')}}" rel="stylesheet">
+  <link href="asset/css/style.css" rel="stylesheet">
 
   <style>
   </style>
@@ -42,16 +42,16 @@
       <div class="container">
 
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="{{url('/')}}">Kantin
+        <a class="navbar-brand" href="index.html">Kantin
           <b>KU</b>
         </a>
-        @if(Route::has('login') || Route::has('register')) @else
+        <!-- @if(Route::has('login') || Route::has('register')) @else -->
         <form class="form-inline">
           <div class="md-form mt-0">
             <input style="text-align:right" class="form-control mr-sm-2" type="text" placeholder="Cari disini.. " aria-label="Search">
           </div>
         </form>
-        @endif
+        <!-- @endif -->
         <!-- Collapse button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
           <div class="form-inline">
             <div class="md-form mt-0">
               <ul class="navbar-nav mr-auto">
-                @if(Route::has('login')) @auth
+                <!-- @if(Route::has('login')) @auth
                 <li class="nav-item active">
                   <div class="nav-link">
                     Abas
@@ -81,17 +81,17 @@
                     </form>
                   </li>
                 </li>
-                @else
+                @else -->
                 <li class="nav-item">
-                  <a class="nav-link" href="{{route('login')}}">Login</a>
+                  <a class="nav-link" href="views/login.html">Login</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" style="cursor: default">or</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{route('register')}}">Register</a>
+                  <a class="nav-link" href="views/login.html">Register</a>
                 </li>
-                @endauth @endif
+                <!-- @endauth @endif -->
               </ul>
 
             </div>
@@ -112,66 +112,62 @@
         <div class="col-md-6 col-md-offset-3">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h1>{{$menu->nama_menu}}</h1>
+              <h1>{{Nama Menu}}</h1>
             </div>
 
             <div class="panel-body">
               <div class="form-horizontal" action="#">
-                {{ csrf_field() }}
                 <div class="form-group">
                   <div class="col-md-12">
                     <h4>Atas Nama :
-                      <b>{{$pesanan->nama_pemesan}}</b>
+                      <b>{{Nama Pemesan}}</b>
                     </h4>
-                    @if($pesanan->jenis_pemesanan == 'antar')
+                    <!-- @if($pesanan->jenis_pemesanan == 'antar') -->
                     <p>
-                      Alamat : {{$pesanan->lokasi_pemesan}}
+                      Alamat : {{Alamat}}
                     </p>
-                    @endif
+                    <!-- @endif -->
                     <h3>
-                      Rp. {{$menu->harga_menu}}
-                      <br> banyak : {{$pesanan->jumlah}}
+                      Rp. {{Harga Menu}}
+                      <br> banyak : {{JUmlah}}
                       <br>
                       <br> total :
-                      <b>Rp. {{$menu->harga_menu*$pesanan->jumlah}}</b>
+                      <b>Rp. {{Harga}}</b>
                     </h3>
                   </div>
                   <div class="col-md-12">
-                    {{$menu->deskripsi_menu}}
+                    {{Deskripsi Menu}}
                   </div>
                   <div class="col-md-12">
-                    @if($pesanan->jenis_pemesanan == 'ambil')
+                    <!-- @if($pesanan->jenis_pemesanan == 'ambil') -->
                     <h3 class="alert alert-success">
                       Terimakasih untuk pesanannya, pesanan Anda akan segera kami proses!
                     </h3>
-                    @else
+                    <!-- @else -->
                     <h3 class="alert alert-success">
                       Silahkan lakukan pembayaran pada Nomor Rekening berikut
                     </h3>
                     <p>
                       <h4>
                         Atas Nama Rekening:
-                        <b>{{$user->name}}</b>
+                        <b>{{Nama}}</b>
                         <br> Nomor Rekening:
-                        <b>{{$user->no_rek}}</b>
+                        <b>{{Nomor Rekening}}</b>
                         <br> Rekening :
-                        <b>{{$user->name_rek}}</b>
+                        <b>{{Rekening}}</b>
                       </h4>
                     </p>
-                    @endif
                     <br>
                     <a href="/" class="btn btn-info">Back</a>
                   </div>
                 </div>
               </div>
             </div>
-            @if($pesanan->jenis_pemesanan == 'ambil')
             <div class="panel-footer">
               Note:
               <br>
               <b>Pesanan akan Hangus bila tidak di ambil dalam kurun waktu 5 menit setelah pemberitahuan dari Admin</b>
             </div>
-            @endif
           </div>
         </div>
       </div>
@@ -179,14 +175,14 @@
   </div>
   </div>
   <!-- Scripts -->
-  <!-- <script src="{{ asset('js/app.js') }}"></script> -->
-  <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+  <script src="asset/js/app.js"></script>
+  <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
+  <script type="text/javascript" src="asset/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+  <script type="text/javascript" src="asset/js/mdb.min.js"></script>
 </body>
 
 </html>
