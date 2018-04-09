@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -7,15 +7,15 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
   <!-- CSRF Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 
   <title>
     Pemesanan Online
   </title>
 
   <!-- Styles -->
-  <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->
+  <link href="asset/css/app.css" rel="stylesheet">
+  <link href="asset/css/style.css" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,11 +23,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
-  <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="asset/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
-  <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
+  <link href="asset/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
-  <link href="{{asset('css/style.css')}}" rel="stylesheet">
+  <link href="asset/css/style.css" rel="stylesheet">
 
   <style>
   </style>
@@ -42,16 +42,14 @@
       <div class="container">
 
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="{{url('/')}}">Kantin
+        <a class="navbar-brand" href="index.html">Kantin
           <b>KU</b>
         </a>
-        @if(Route::has('login') || Route::has('register')) @else
         <form class="form-inline">
           <div class="md-form mt-0">
             <input style="text-align:right" class="form-control mr-sm-2" type="text" placeholder="Cari disini.. " aria-label="Search">
           </div>
         </form>
-        @endif
         <!-- Collapse button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -66,22 +64,6 @@
           <div class="form-inline">
             <div class="md-form mt-0">
               <ul class="navbar-nav mr-auto">
-                @if(Route::has('login')) @auth
-                <li class="nav-item active">
-                  <div class="nav-link">
-                    Abas
-                    <span class="sr-only"></span>
-                  </div>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">Logout</a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      {{ csrf_field() }}
-                    </form>
-                  </li>
-                </li>
-                @else
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('login')}}">Login</a>
                 </li>
@@ -91,7 +73,6 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('register')}}">Register</a>
                 </li>
-                @endauth @endif
               </ul>
 
             </div>
@@ -109,37 +90,32 @@
 
     <div class="container">
       <div class="row">
-        @if(session('msg'))
         <div class="col-md-6 col-md-offset-3">
-          <p class="alert alert-danger">{{session('msg')}}</p>
+          <p class="alert alert-danger">Session Message</p>
         </div>
-        @endif
         <div class="col-md-6 col-md-offset-3">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h1>{{$menu->nama_menu}}</h1>
+              <h1>Nama Menu</h1>
             </div>
 
             <div class="panel-body">
               <form class="form-horizontal" action="#">
-                {{ csrf_field() }}
-
                 <div class="form-group">
                   <div class="col-md-12">
-                    <h3>Rp. {{$menu->harga_menu}}</h3>
+                    <h3>Rp. Harga Menu</h3>
                   </div>
                   <div class="col-md-12">
-                    {{$menu->deskripsi_menu}}
+                    Deskripsi Menu
                   </div>
                   <div class="col-md-12">
-                    tersisa : {{$menu->stok_menu}}
+                    tersisa : Stok Menu
                   </div>
                 </div>
               </form>
             </div>
             <div class="panel-body">
               <form class="form-horizontal" method="POST" action="{{ route('simpan_transaksi') }}">
-                {{ csrf_field() }}
                 <input type="number" name="menu_id" style="display: none;" value="{{$menu->id}}">
                 <div class="form-group{{ $errors->has('jenis_pemesanan') ? ' has-error' : '' }}">
                   <div class="col-md-6">
@@ -149,11 +125,9 @@
                       <option value="antar">Antar</option>
                       <option value="ambil">Ambil</option>
                     </select>
-                    @if ($errors->has('jenis_pemesanan'))
                     <span class="help-block">
-                      <strong>{{ $errors->first('jenis_pemesanan') }}</strong>
+                      <!-- <strong>Jenis Pemesanan</strong> -->
                     </span>
-                    @endif
                   </div>
                   <div class="col-md-6">
                     <label for="jumlah">Jumlah Pesanan*</label>
@@ -163,31 +137,28 @@
                 <div class="form-group{{ $errors->has('nama_pemesan') ? ' has-error' : '' }}">
                   <div class="col-md-12">
                     <label for="nama_pemesan">Nama*</label>
-                    <input type="text" name="nama_pemesan" id="nama_pemesan" placeholder="Nama Pemesa" class="form-control"> @if ($errors->has('nama_pemesan'))
+                    <input type="text" name="nama_pemesan" id="nama_pemesan" placeholder="Nama Pemesa" class="form-control">
                     <span class="help-block">
-                      <strong>{{ $errors->first('nama_pemesan') }}</strong>
+                      <!-- <strong>Nama Pemesan</strong> -->
                     </span>
-                    @endif
                   </div>
                 </div>
                 <div class="form-group{{ $errors->has('kontak_pemesan') ? ' has-error' : '' }}">
                   <div class="col-md-12">
                     <label for="kontak_pemesan">Kontak*</label>
-                    <input type="text" name="kontak_pemesan" id="kontak_pemesan" placeholder="Telegram, IG, LINE, Whats App" class="form-control"> @if ($errors->has('kontak_pemesan'))
+                    <input type="text" name="kontak_pemesan" id="kontak_pemesan" placeholder="Telegram, IG, LINE, Whats App" class="form-control">
                     <span class="help-block">
-                      <strong>{{ $errors->first('kontak_pemesan') }}</strong>
+                      <!-- <strong>Kontak Pemesan</strong> -->
                     </span>
-                    @endif
                   </div>
                 </div>
                 <div class="form-group{{ $errors->has('lokasi_pemesan') ? ' has-error' : '' }}">
                   <div class="col-md-12">
                     <label for="lokasi_pemesan">Lokasi</label>
-                    <input type="text" name="lokasi_pemesan" id="lokasi_pemesan" placeholder="Kosongi jika anda memilih Pesanan Ambil" class="form-control"> @if ($errors->has('lokasi_pemesan'))
+                    <input type="text" name="lokasi_pemesan" id="lokasi_pemesan" placeholder="Kosongi jika anda memilih Pesanan Ambil" class="form-control">
                     <span class="help-block">
-                      <strong>{{ $errors->first('lokasi_pemesan') }}</strong>
+                      <!-- <strong>Lokasi Pemesan</strong> -->
                     </span>
-                    @endif
                   </div>
                 </div>
                 <div class="form-group">
@@ -210,14 +181,14 @@
     </div>
   </div>
   <!-- Scripts -->
-  <!-- <script src="{{ asset('js/app.js') }}"></script> -->
-  <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+  <script src="asset/js/app.js"></script>
+  <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
+  <script type="text/javascript" src="asset/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="asset/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
+  <script type="text/javascript" src="asset/js/mdb.min.js"></script>
 </body>
 
 </html>
